@@ -1,0 +1,1 @@
+# ShitCRM_for_fullstack
