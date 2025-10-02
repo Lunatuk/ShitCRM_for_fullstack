@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Простой чат</title>
+  <style>
+    body { font-family: sans-serif; margin: 40px; background:#f9fafb; }
+    form { margin-bottom: 20px; }
+    input[type=text] { padding: 8px; width: 250px; }
+    button { padding: 8px 12px; }
+    .response { margin-top: 20px; padding: 10px; background:#e0f2fe; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Отправь сообщение</h1>
+  <form action="/send" method="post">
+    <input type="text" name="message" placeholder="Напиши что-нибудь" required>
+    <button type="submit">Отправить</button>
+  </form>
+  {% if response %}
+    <div class="response">{{ response }}</div>
+  {% endif %}
+</body>
+</html>
