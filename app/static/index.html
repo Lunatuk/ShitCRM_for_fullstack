@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Passport OCR</title>
+  <style>
+    body{font-family:system-ui,Arial;padding:24px;max-width:800px;margin:auto}
+    .card{border:1px solid #ddd;border-radius:12px;padding:16px;margin-top:16px}
+    #preview{max-width:100%;border-radius:8px;margin-top:8px}
+    button{padding:10px 16px;border-radius:8px;border:0;background:#111;color:#fff;cursor:pointer}
+    .row{display:flex;gap:16px;align-items:center}
+    .res{white-space:pre-wrap;font-family:ui-monospace,Consolas}
+  </style>
+</head>
+<body>
+  <h1>RU Passport Series/Number OCR</h1>
+  <p>Загрузите фото разворота паспорта. На выходе — <b>AA BB CCCCCC</b>.</p>
+
+  <div class="card">
+    <div class="row">
+      <input id="file" type="file" accept="image/*"/>
+      <button onclick="send()">Распознать</button>
+    </div>
+    <img id="preview"/>
+  </div>
+
+  <div class="card">
+    <h3>Результат</h3>
+    <div id="out" class="res">—</div>
+  </div>
+
+<script>
+const f = document.getElementById('file');
+const out = document.getElementById('out');
+const pv = document.getElementById('preview');
+f.addEventListener('change', e=>{
+  const file = f.files[0];
+  if(!file) return;
+  pv.src = URL.createObjectURL(file);
+});
+async function send(){
+  const file = f.files[0];
+  if(!file){ alert('Выберите файл'); return; }
+  out.textContent = 'Обработка...';
+  const fd = new FormData(); fd.append('file', file);
+  const r = await fetch('/api/ocr', {method:'POST', body: fd});
+  const j = await r.json();
+  out.textContent = JSON.stringify(j, null, 2);
+}
+</script>
+</body>
+</html>
