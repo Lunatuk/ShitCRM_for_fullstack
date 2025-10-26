@@ -1,0 +1,4 @@
+# data.yaml — без 'path'!
+train: C:/Users/ivana/OneDrive/Документы/GitHub/ShitCRM_for_fullstack/datasets/passport_roi/images/train
+val:   C:/Users/ivana/OneDrive/Документы/GitHub/ShitCRM_for_fullstack/datasets/passport_roi/images/val
+names: [series_block]
